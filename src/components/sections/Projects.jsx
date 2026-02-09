@@ -1,14 +1,13 @@
+import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 
-// Importă imaginile corect (înlocuiește calea cu cea reală din proiectul tău)
+// Import images (adjust paths if your project structure differs)
 import project1Img from "../images/project1.jpg";
 import project2Img from "../images/project2.jpg";
 import project3Img from "../images/project3.jpg";
 import emberCoffeeImg from "../images/project4.jpg";
 import donerImg from "../images/project5.jpg";
 import flowersImg from "../images/project6.jpg";
-
 
 const projects = [
   {
@@ -19,6 +18,7 @@ const projects = [
       "Eco-friendly e-commerce with sleek animations, smooth UX, and high-performance design.",
     tags: ["HTML", "CSS", "JavaScript"],
     image: project1Img,
+    url: "https://pur.md/",
   },
   {
     id: 2,
@@ -28,6 +28,7 @@ const projects = [
       "Modern online food ordering app with fast, responsive, and smooth user experience.",
     tags: ["HTML", "CSS", "JavaScript"],
     image: project2Img,
+    url: "https://delicy.vercel.app/Acasa.html",
   },
   {
     id: 3,
@@ -37,6 +38,7 @@ const projects = [
       "Sleek designer portfolio with smooth animations and dynamic, responsive navigation.",
     tags: ["React", "Tailwind CSS", "Framer Motion"],
     image: project3Img,
+    url: "https://project-portfolio-neon.vercel.app/",
   },
   {
     id: 4,
@@ -46,6 +48,7 @@ const projects = [
       "Multi-location coffee shop website with interactive map and modern UI for 6 locations in Chișinău.",
     tags: ["React", "Tailwind CSS", "Framer Motion", "MapLibre GL", "SEO"],
     image: emberCoffeeImg,
+    url: "https://coffee-shop-pi-six.vercel.app/",
   },
   {
     id: 5,
@@ -55,6 +58,7 @@ const projects = [
       "Modern food ordering platform for authentic doner and kebab with dynamic menu filtering.",
     tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
     image: donerImg,
+    url: "https://doner-sepia.vercel.app/",
   },
   {
     id: 6,
@@ -64,6 +68,7 @@ const projects = [
       "Premium 24/7 flower delivery service with elegant design and interactive catalog.",
     tags: ["Tailwind CSS", "JavaScript", "Google Maps API", "Mobile Design"],
     image: flowersImg,
+    url: "https://street-flowers.vercel.app/",
   },
 ];
 
@@ -74,7 +79,7 @@ export default function Projects() {
   return (
     <section id="projects" className="min-h-screen py-32 bg-gray-50">
       <div className="container mx-auto px-6">
-        {/* Titlu animat */}
+        {/* Animated title */}
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -85,21 +90,36 @@ export default function Projects() {
           Featured Work
         </motion.h2>
 
-        {/* Grid proiecte */}
+        {/* Projects grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {projects.map((project, i) => (
-            <motion.div
+            <motion.article
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              whileHover={{ y: -6 }}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-48 object-cover"
-              />
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${project.title} project in new tab`}
+                className="block overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-200 rounded-md"
+              >
+                {/* Image with mini levitation animation on hover and focus */}
+                <motion.img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 object-cover"
+                  whileHover={{ y: -8, scale: 1.03 }}
+                  whileFocus={{ y: -8, scale: 1.03 }}
+                  whileTap={{ scale: 0.99 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                />
+              </a>
+
               <div className="p-6">
                 <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-gray-600 mb-4">{project.description}</p>
@@ -114,7 +134,7 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
