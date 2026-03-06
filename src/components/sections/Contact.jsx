@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useState, useRef } from 'react'
+import emailjs from '@emailjs/browser'
 import GradientButton from '../ui/GradientButton'
 
 export default function Contact() {
@@ -20,11 +21,38 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1200))
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    setFormData({ name: '', email: '', message: '' })
-    setTimeout(() => setSubmitSuccess(false), 3000)
+
+    const updatedMessage = `${formData.message}\n\nEmail: ${formData.email}`
+
+    try {
+      await emailjs.send(
+        'service_vrwctvo',
+        'template_92mltst',
+        {
+          from_name: formData.name,
+          to_name: 'Stanislav',
+          from_email: formData.email,
+          to_email: 'stanislavacicanci@gmail.com',
+          message: updatedMessage
+        },
+        '1JTlKFbv-5WQvnVa3'
+      )
+
+      alert("Your message has been sent!")
+
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      })
+      setSubmitSuccess(true)
+      setTimeout(() => setSubmitSuccess(false), 3000)
+    } catch (error) {
+      console.log(error)
+      alert("Something went wrong!")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
