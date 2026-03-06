@@ -14,18 +14,19 @@ const wordVariants = {
   })
 }
 
-export default function AnimatedText({ text, className }) {
+export default function AnimatedText({ text, className = "" }) {
   const words = text.split(' ')
 
   return (
-    <div className={`flex flex-wrap ${className}`}>
+    <div className={`flex flex-wrap items-center justify-center ${className}`}>
       {words.map((word, i) => (
         <motion.span
           key={i}
           custom={i}
           variants={wordVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="mr-2 inline-block"
         >
           {word}

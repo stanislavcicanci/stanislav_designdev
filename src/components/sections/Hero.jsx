@@ -12,41 +12,76 @@ function Hero() {
   })
 
   const yText = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05])
 
   return (
     <section ref={ref} className="relative h-[150vh]" id="hero">
-      <FloatingShapes count={12} />
+      <FloatingShapes count={10} />
 
       <motion.div
         style={{ scale, opacity }}
         className="sticky top-0 h-screen flex items-center justify-center overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#126fd9]/5 to-[#f73f17]/5 backdrop-blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#126fd9]/5 via-white to-white backdrop-blur-3xl" />
 
         <motion.div
           style={{ y: yText }}
-          className="container mx-auto px-6 text-center relative z-10"
+          className="container mx-auto px-6 flex flex-col items-center text-center relative z-10"
         >
-          <div className="mb-6 inline-block">
-            <span className="text-4xl sm:text-6xl md:text-8xl font-black text-gradient">
+          {/* Status Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mb-8 px-4 py-1.5 rounded-full bg-white border border-gray-100 shadow-sm flex items-center gap-2"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f73f17] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#f73f17]"></span>
+            </span>
+            <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">
+              Available for new projects
+            </span>
+          </motion.div>
+
+          {/* Title Stacks */}
+          <div className="flex flex-col items-center mb-8">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-6xl sm:text-8xl md:text-9xl font-black text-gradient leading-none"
+            >
               STANISLAV
-            </span>
-            <span className="text-4xl sm:text-6xl md:text-8xl font-black text-gray-900 ml-4">
+            </motion.h1>
+            <motion.span
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-4xl sm:text-6xl md:text-7xl font-black text-gray-900 mt-2 tracking-tight"
+            >
               DesignDev
-            </span>
+            </motion.span>
           </div>
 
-          <AnimatedText
-            text="Digital Experience Architect"
-            className="text-xl sm:text-3xl md:text-5xl font-light text-gray-600 mb-12"
-          />
+          <div className="max-w-2xl mx-auto mb-12">
+            <AnimatedText
+              text="Digital Experience Architect"
+              className="text-xl sm:text-2xl md:text-3xl font-light text-gray-500"
+            />
+          </div>
 
-          <GradientButton
-            text="Explore My Work"
-            onClick={() => document.getElementById('projects').scrollIntoView()}
-          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <GradientButton
+              text="Explore My Work"
+              onClick={() => document.getElementById('projects').scrollIntoView()}
+            />
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>
