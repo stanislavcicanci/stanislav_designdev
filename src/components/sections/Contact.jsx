@@ -38,8 +38,6 @@ export default function Contact() {
         '1JTlKFbv-5WQvnVa3'
       )
 
-      alert("Your message has been sent!")
-
       setFormData({
         name: '',
         email: '',
@@ -49,7 +47,6 @@ export default function Contact() {
       setTimeout(() => setSubmitSuccess(false), 3000)
     } catch (error) {
       console.log(error)
-      alert("Something went wrong!")
     } finally {
       setIsSubmitting(false)
     }
