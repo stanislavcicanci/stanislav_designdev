@@ -80,6 +80,21 @@ export default function Contact() {
             Have a project in mind? Let's discuss how we can bring your vision to life.
           </motion.p>
 
+          <div className="flex flex-col items-center gap-2 mb-8 text-sm sm:text-base text-gray-600">
+            <a href="mailto:stanislavacicanci@gmail.com" className="hover:text-gray-900 transition-colors">
+              stanislavacicanci@gmail.com
+            </a>
+            <a href="https://github.com/stanislavcicanci" target="_blank" className="hover:text-gray-900 transition-colors">
+              github.com/stanislavcicanci
+            </a>
+            <a href="https://www.linkedin.com/in/cicanci-stanislav-9346a9344/" target="_blank" className="hover:text-gray-900 transition-colors">
+              linkedin.com/in/cicanci-stanislav
+            </a>
+            <a href="https://x.com/CicanciS22905" target="_blank" className="hover:text-gray-900 transition-colors">
+              x.com/CicanciS22905
+            </a>
+          </div>
+
           <motion.form
             onSubmit={handleSubmit}
             className="space-y-4"
