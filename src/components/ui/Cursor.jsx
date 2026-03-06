@@ -89,10 +89,10 @@ function Cursor() {
           height: size,
           opacity,
           scale: isActive ? 0.9 : 1,
-          backgroundColor: '#ef4444',
+          backgroundColor: '#126fd9',
           boxShadow: `
-            0 0 12px rgba(239,68,68,0.6),
-            0 0 32px rgba(239,68,68,0.35)
+            0 0 12px rgba(18,111,217,0.6),
+            0 0 32px rgba(247,63,23,0.35)
           `
         }}
       />
@@ -107,7 +107,7 @@ function Cursor() {
           height: size,
           scale: trailScale,
           opacity: 0.25,
-          backgroundColor: '#f87171',
+          backgroundColor: '#f73f17',
           filter: 'blur(6px)'
         }}
       />

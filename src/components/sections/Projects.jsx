@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 
-// Import images (adjust paths if your project structure differs)
 import project1Img from "../images/project1.jpg";
 import project2Img from "../images/project2.jpg";
 import project3Img from "../images/project3.jpg";
@@ -14,8 +14,7 @@ const projects = [
     id: 1,
     title: "Purely Ecological",
     category: "Web Design & Development",
-    description:
-      "Eco-friendly e-commerce with sleek animations, smooth UX, and high-performance design.",
+    description: "Eco-friendly e-commerce with sleek animations, smooth UX, and high-performance design.",
     tags: ["HTML", "CSS", "JavaScript"],
     image: project1Img,
     url: "https://pur.md/",
@@ -24,8 +23,7 @@ const projects = [
     id: 2,
     title: "Delicy",
     category: "Web Design & Development",
-    description:
-      "Modern online food ordering app with fast, responsive, and smooth user experience.",
+    description: "Modern online food ordering app with fast, responsive, and smooth user experience.",
     tags: ["HTML", "CSS", "JavaScript"],
     image: project2Img,
     url: "https://delicy.vercel.app/Acasa.html",
@@ -34,8 +32,7 @@ const projects = [
     id: 3,
     title: "Cătălin Țurcanu",
     category: "Portfolio Website",
-    description:
-      "Sleek designer portfolio with smooth animations and dynamic, responsive navigation.",
+    description: "Sleek designer portfolio with smooth animations and dynamic, responsive navigation.",
     tags: ["React", "Tailwind CSS", "Framer Motion"],
     image: project3Img,
     url: "https://project-portfolio-neon.vercel.app/",
@@ -44,9 +41,8 @@ const projects = [
     id: 4,
     title: "Ember Coffee",
     category: "Coffee Shop Platform",
-    description:
-      "Multi-location coffee shop website with interactive map and modern UI for 6 locations in Chișinău.",
-    tags: ["React", "Tailwind CSS", "Framer Motion", "MapLibre GL", "SEO"],
+    description: "Multi-location coffee shop website with interactive map and modern UI for 6 locations in Chișinău.",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "MapLibre GL"],
     image: emberCoffeeImg,
     url: "https://coffee-shop-pi-six.vercel.app/",
   },
@@ -54,8 +50,7 @@ const projects = [
     id: 5,
     title: "Doner Kebab & Shawarma",
     category: "Food Delivery Website",
-    description:
-      "Modern food ordering platform for authentic doner and kebab with dynamic menu filtering.",
+    description: "Modern food ordering platform for authentic doner and kebab with dynamic menu filtering.",
     tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
     image: donerImg,
     url: "https://doner-sepia.vercel.app/",
@@ -64,9 +59,8 @@ const projects = [
     id: 6,
     title: "FloWers 24/7",
     category: "Flower Delivery Service",
-    description:
-      "Premium 24/7 flower delivery service with elegant design and interactive catalog.",
-    tags: ["Tailwind CSS", "JavaScript", "Google Maps API", "Mobile Design"],
+    description: "Premium 24/7 flower delivery service with elegant design and interactive catalog.",
+    tags: ["Tailwind CSS", "JavaScript", "Google Maps API"],
     image: flowersImg,
     url: "https://street-flowers.vercel.app/",
   },
@@ -74,65 +68,96 @@ const projects = [
 
 export default function Projects() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="min-h-screen py-32 bg-gray-50">
-      <div className="container mx-auto px-6">
-        {/* Animated title */}
-        <motion.h2
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-20 text-center text-gradient"
-        >
-          Featured Work
-        </motion.h2>
+    <section id="projects" className="py-24 sm:py-32 bg-white relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
 
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mb-16">
+          <motion.h2
+            ref={ref}
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-gradient"
+          >
+            Featured Work
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-lg text-gray-600"
+          >
+            A curated selection of digital experiences built with precision, performance, and modern aesthetics.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {projects.map((project, i) => (
             <motion.article
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              whileHover={{ y: -6 }}
-              className="bg-white rounded-lg shadow-lg overflow-hidden"
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="group relative bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-all duration-500 shadow-sm hover:shadow-xl"
             >
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open ${project.title} project in new tab`}
-                className="block overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-200 rounded-md"
-              >
-                {/* Image with mini levitation animation on hover and focus */}
+              <div className="relative aspect-video overflow-hidden">
                 <motion.img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-48 object-cover"
-                  whileHover={{ y: -8, scale: 1.03 }}
-                  whileFocus={{ y: -8, scale: 1.03 }}
-                  whileTap={{ scale: 0.99 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-              </a>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
 
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-6 right-6 p-4 rounded-full bg-white text-gray-900 shadow-lg transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hover:scale-110 active:scale-95"
+                  aria-label={`Visit ${project.title} website`}
+                >
+                  <ExternalLink size={24} />
+                </a>
+              </div>
+
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#126fd9]">
+                    {project.category}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-bold mb-3 group-hover:text-[#126fd9] transition-colors">
+                  {project.title}
+                </h3>
+
+                <p className="text-gray-600 mb-6 line-clamp-2">
+                  {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-8">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-white border border-gray-100 rounded-full text-xs font-medium text-gray-500"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
+
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white font-medium hover:bg-[#126fd9] transition-all duration-300 transform hover:translate-x-1"
+                >
+                  Visit Website
+                  <ExternalLink size={16} />
+                </a>
               </div>
             </motion.article>
           ))}
