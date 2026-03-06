@@ -5,29 +5,29 @@ const socialLinks = [
   {
     name: 'GitHub',
     icon: <Github size={20} />,
-    url: 'https://github.com'
+    url: 'https://github.com/stanislavcicanci'
   },
   {
     name: 'Twitter',
     icon: <Twitter size={20} />,
-    url: 'https://twitter.com'
+    url: 'https://x.com/CicanciS22905'
   },
   {
     name: 'LinkedIn',
     icon: <Linkedin size={20} />,
-    url: 'https://linkedin.com'
+    url: 'https://www.linkedin.com/in/cicanci-stanislav-9346a9344/'
   },
   {
     name: 'Email',
     icon: <Mail size={20} />,
-    url: 'mailto:contact@example.com'
+    url: 'mailto:stanislavacicanci@gmail.com'
   }
 ]
 
 export default function Footer() {
   return (
     <footer className="relative bg-gray-900 text-white py-16 overflow-hidden">
-      <motion.div 
+      <motion.div
         className="absolute top-0 left-0 w-full h-full opacity-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.1 }}
@@ -48,7 +48,7 @@ export default function Footer() {
           >
             Stanislav DesignDev
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ export default function Footer() {
               </motion.a>
             ))}
           </motion.div>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
