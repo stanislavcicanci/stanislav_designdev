@@ -112,7 +112,7 @@ export default function Process() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center text-gradient"
         >
           The Process
         </motion.h2>
@@ -131,16 +131,16 @@ export default function Process() {
               className="flex items-start gap-4 sm:gap-6 mb-6 sm:mb-8 group"
             >
               <div className="flex flex-col items-center">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-[#126fd9] to-[#f73f17] text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300">
                   <step.icon className="w-7 h-7 sm:w-8 sm:h-8" />
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="w-0.5 bg-gradient-to-b from-blue-400 to-purple-400 h-8 sm:h-10 mt-2 rounded-full" />
+                  <div className="w-0.5 bg-gradient-to-b from-[#126fd9]/40 to-[#f73f17]/40 h-8 sm:h-10 mt-2 rounded-full" />
                 )}
               </div>
 
               <div className="pt-2 flex-1 min-w-0">
-                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 group-hover:text-[#126fd9] transition-colors">
                   {step.title}
                 </h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
