@@ -27,15 +27,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="relative bg-gray-900 text-white py-16 overflow-hidden">
-      <motion.div
-        className="absolute top-0 left-0 w-full h-full opacity-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
-      >
-        <div className="absolute top-20 left-1/4 w-32 h-32 rounded-full bg-blue-500 filter blur-3xl" />
-        <div className="absolute bottom-20 right-1/4 w-40 h-40 rounded-full bg-purple-500 filter blur-3xl" />
-      </motion.div>
+
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center justify-center">

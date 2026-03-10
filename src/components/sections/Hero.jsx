@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import FloatingShapes from '../ui/FloatingShapes'
+
 import AnimatedText from '../ui/AnimatedText'
 import GradientButton from '../ui/GradientButton'
 
@@ -17,7 +17,7 @@ function Hero() {
 
   return (
     <section ref={ref} className="relative h-[150vh]" id="hero">
-      <FloatingShapes count={10} />
+
 
       <motion.div
         style={{ scale, opacity }}
