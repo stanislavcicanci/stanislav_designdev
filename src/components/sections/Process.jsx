@@ -104,8 +104,9 @@ export default function Process() {
                 </p>
               </div>
             </div>
+            </motion.div>
           ))}
-      </div>
+      </motion.div>
     </div>
     </section >
   )
