@@ -8,8 +8,8 @@ const wordVariants = {
     y: 0,
     transition: {
       delay: i * 0.05,
-      type: 'spring',
-      stiffness: 100
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1]
     }
   })
 }

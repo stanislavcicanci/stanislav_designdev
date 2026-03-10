@@ -79,11 +79,10 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 120, damping: 18 }}
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          scrolled || isOpen
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled || isOpen
             ? 'bg-white/90 backdrop-blur-xl shadow-lg'
             : 'bg-transparent'
-        }`}
+          }`}
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -123,11 +122,10 @@ export default function Navbar() {
                   className="relative px-3 py-2 text-base font-medium"
                 >
                   <span
-                    className={`transition-colors ${
-                      activeSection === item.id
+                    className={`transition-colors ${activeSection === item.id
                         ? 'text-blue-600'
                         : 'text-gray-700 hover:text-blue-600'
-                    }`}
+                      }`}
                   >
                     {item.name}
                   </span>
@@ -135,6 +133,11 @@ export default function Navbar() {
                   {activeSection === item.id && (
                     <motion.div
                       layoutId="nav-underline"
+                      transition={{
+                        type: 'tween',
+                        ease: [0.16, 1, 0.3, 1],
+                        duration: 0.6
+                      }}
                       className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"
                     />
                   )}
@@ -204,11 +207,10 @@ export default function Navbar() {
                   onClick={() => scrollTo(item.id)}
                   whileHover={{ x: 10 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`text-left text-3xl font-medium ${
-                    activeSection === item.id
+                  className={`text-left text-3xl font-medium ${activeSection === item.id
                       ? 'text-blue-600'
                       : 'text-gray-900'
-                  }`}
+                    }`}
                 >
                   {item.name}
                 </motion.button>

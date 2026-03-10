@@ -1,4 +1,3 @@
-import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const steps = [
@@ -35,52 +34,23 @@ const steps = [
 ]
 
 export default function Process() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-120px' })
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.06 } }
-  }
-
-  const item = {
-    hidden: { opacity: 0, x: 30 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.45 } }
-  }
-
   return (
     <section id="process" className="py-16 sm:py-20 lg:py-24">
       <div className="container mx-auto px-6 max-w-4xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center text-gradient"
-        >
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center text-gradient">
           The Process
-        </motion.h2>
+        </h2>
 
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={isInView ? 'show' : 'hidden'}
-          variants={container}
-          className="mx-auto"
-        >
+        <div className="mx-auto">
           {steps.map((step, index) => (
-            <motion.div
+            <div
               key={step.id}
-              variants={item}
-              whileHover={{ y: -6, scale: 1.01 }}
               className="flex items-start gap-4 mb-6 sm:mb-8"
             >
               <div className="flex flex-col items-center">
-                <motion.div
-                  whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center text-lg sm:text-xl shadow-md"
-                >
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center text-lg sm:text-xl shadow-md">
                   {step.icon}
-                </motion.div>
+                </div>
                 {index < steps.length - 1 && (
                   <div className="w-px bg-gray-200 h-6 sm:h-8 mt-2" />
                 )}
@@ -94,9 +64,9 @@ export default function Process() {
                   {step.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

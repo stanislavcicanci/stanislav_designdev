@@ -37,7 +37,14 @@ export default function About() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    }
   }
 
   return (
@@ -78,6 +85,7 @@ export default function About() {
                 variants={cardVariants}
                 whileHover={{ y: -8, scale: 1.02 }}
                 whileTap={{ scale: 0.995 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
                 className="bg-white/80 backdrop-blur-sm p-5 sm:p-7 rounded-2xl shadow-lg border border-gray-100 h-full flex flex-col group focus-within:ring-2 focus-within:ring-indigo-300"
                 tabIndex={0}
                 aria-labelledby={`skill-title-${index}`}
