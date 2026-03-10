@@ -14,14 +14,14 @@ function Cursor() {
 
   const targetSize = useMotionValue(baseSize)
 
-  // Size = slower & heavier → smooth scaling
+
   const size = useSpring(targetSize, {
     stiffness: 180,
     damping: 30,
     mass: 0.8
   })
 
-  // Position = very soft follow
+
   const x = useSpring(mouseX, {
     stiffness: 120,
     damping: 20,
@@ -79,7 +79,7 @@ function Cursor() {
 
   return (
     <>
-      {/* Main Cursor */}
+
       <motion.div
         className="fixed pointer-events-none rounded-full z-50"
         style={{
@@ -97,7 +97,7 @@ function Cursor() {
         }}
       />
 
-      {/* Glow Trail */}
+
       <motion.div
         className="fixed pointer-events-none rounded-full z-40"
         style={{

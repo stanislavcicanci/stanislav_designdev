@@ -29,7 +29,7 @@ function Hero() {
           style={{ y: yText }}
           className="container mx-auto px-6 flex flex-col items-center text-center relative z-10"
         >
-          {/* Status Badge */}
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ function Hero() {
             </span>
           </motion.div>
 
-          {/* Title Stacks */}
+
           <div className="flex flex-col items-center mb-8">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}

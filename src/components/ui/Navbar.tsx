@@ -80,8 +80,8 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 120, damping: 18 }}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled || isOpen
-            ? 'bg-white/90 backdrop-blur-xl shadow-lg'
-            : 'bg-transparent'
+          ? 'bg-white/90 backdrop-blur-xl shadow-lg'
+          : 'bg-transparent'
           }`}
       >
         <div className="container mx-auto px-6 py-4">
@@ -123,8 +123,8 @@ export default function Navbar() {
                 >
                   <span
                     className={`transition-colors ${activeSection === item.id
-                        ? 'text-blue-600'
-                        : 'text-gray-700 hover:text-blue-600'
+                      ? 'text-blue-600'
+                      : 'text-gray-700 hover:text-blue-600'
                       }`}
                   >
                     {item.name}
@@ -208,8 +208,8 @@ export default function Navbar() {
                   whileHover={{ x: 10 }}
                   whileTap={{ scale: 0.95 }}
                   className={`text-left text-3xl font-medium ${activeSection === item.id
-                      ? 'text-blue-600'
-                      : 'text-gray-900'
+                    ? 'text-blue-600'
+                    : 'text-gray-900'
                     }`}
                 >
                   {item.name}
