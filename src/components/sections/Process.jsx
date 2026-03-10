@@ -103,11 +103,10 @@ export default function Process() {
                   {step.description}
                 </p>
               </div>
-            </div>
             </motion.div>
           ))}
-      </motion.div>
-    </div>
-    </section >
+        </motion.div>
+      </div>
+    </section>
   )
 }
