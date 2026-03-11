@@ -1,11 +1,7 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import AnimatedText from '../ui/AnimatedText'
 
 export default function About() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   const skills = [
     {
       title: 'Design Philosophy',
@@ -25,28 +21,6 @@ export default function About() {
     }
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12
-      }
-    }
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
-  }
-
   return (
     <section
       id="about"
@@ -54,20 +28,17 @@ export default function About() {
       aria-labelledby="about-heading"
     >
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-6xl">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={isInView ? 'show' : 'hidden'}
-          variants={containerVariants}
-          className="mx-auto"
-        >
+        <div className="mx-auto">
           <AnimatedText
             text="Crafting Digital Excellence"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-10 sm:mb-14 md:mb-16 text-gradient"
           />
 
           <motion.p
-            variants={cardVariants}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mb-10"
           >
             Every project begins with a vision. I transform that vision into
@@ -75,17 +46,20 @@ export default function About() {
             thinking, and cutting-edge development practices.
           </motion.p>
 
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {skills.map((skill, index) => (
               <motion.article
                 key={index}
-                variants={cardVariants}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{
+                  duration: 0.7,
+                  delay: index * 0.12,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 whileTap={{ scale: 0.995 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
                 className="bg-white/80 backdrop-blur-sm p-5 sm:p-7 rounded-2xl shadow-lg border border-gray-100 h-full flex flex-col group focus-within:ring-2 focus-within:ring-indigo-300"
                 tabIndex={0}
                 aria-labelledby={`skill-title-${index}`}
@@ -117,8 +91,8 @@ export default function About() {
                 </div>
               </motion.article>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

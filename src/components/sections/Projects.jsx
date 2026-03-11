@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useRef, useEffect } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 import project1Img from "../images/project1.jpg";
@@ -66,46 +66,94 @@ const projects = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
+
+const headingVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const subtitleVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 export default function Projects() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.05 });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
 
   return (
-    <section id="projects" className="py-24 sm:py-32 bg-white relative overflow-hidden">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="py-24 sm:py-32 bg-white relative overflow-hidden"
+    >
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
 
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-16">
           <motion.h2
-            ref={ref}
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            variants={headingVariants}
+            initial="hidden"
+            animate={controls}
             className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-gradient"
           >
             Featured Work
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            variants={subtitleVariants}
+            initial="hidden"
+            animate={controls}
             className="text-lg text-gray-600"
           >
             A curated selection of digital experiences built with precision, performance, and modern aesthetics.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {projects.map((project, i) => (
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          animate={controls}
+        >
+          {projects.map((project) => (
             <motion.article
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariants}
               className="group relative bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-xl"
             >
               <div className="relative aspect-video overflow-hidden">
-                <motion.img
+                <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ease-out"
@@ -161,7 +209,7 @@ export default function Projects() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
