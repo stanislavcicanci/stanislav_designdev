@@ -1,6 +1,18 @@
 import { motion } from 'framer-motion'
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react'
 
+const BehanceIcon = ({ size }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor"
+  >
+    <path d="M8.2 5.8h-4.3v12.4h4.7c2.6 0 4.2-1.1 4.2-3.3 0-1.4-1-2.4-2.2-2.8 1-.4 1.8-1.3 1.8-2.6 0-2.1-1.6-3.7-4.2-3.7zm-1.8 4.7v-2.5h1.9c1 0 1.6.5 1.6 1.3 0 .8-.6 1.2-1.7 1.2h-1.8zm0 5.4v-3h2.1c1.3 0 2 .5 2 1.4 0 1-.7 1.6-2 1.6h-2.1zM18.8 8.9h-4v2.1h4v-2.1zm-2 2.6c-2.3 0-3.6 1.7-3.6 4.1s1.3 4.1 3.5 4.1c1.8 0 3-.9 3.3-2.3h-2.1c-.2.4-.6.6-1.2.6-1 0-1.4-.7-1.4-1.7h4.8c0-.2 0-.4 0-.6 0-2.5-1.4-4.2-3.3-4.2zm-1.4 2.8c.2-.9.8-1.2 1.4-1.2.7 0 1.1.4 1.2 1.2h-2.6z" />
+  </svg>
+)
+
 const socialLinks = [
   {
     name: 'GitHub',
@@ -21,6 +33,11 @@ const socialLinks = [
     name: 'Email',
     icon: <Mail size={20} />,
     url: 'mailto:stanislavacicanci@gmail.com'
+  },
+  {
+    name: 'Behance',
+    icon: <BehanceIcon size={20} />,
+    url: 'https://www.behance.net/cicancistanisl'
   }
 ]
 

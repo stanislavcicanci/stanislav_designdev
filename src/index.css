@@ -40,3 +40,15 @@ html.lenis {
   background: rgba(18, 111, 217, 0.2);
   color: var(--primary-orange);
 }
+
+/* Custom autofill styles to prevent default yellow/blue background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #111827 !important; /* text-gray-900 */
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important; /* solid white to simulate clear background */
+  transition: background-color 5000s ease-in-out 0s;
+}
