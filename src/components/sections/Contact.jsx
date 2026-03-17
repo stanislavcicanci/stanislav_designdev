@@ -14,18 +14,6 @@ export default function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  const handleBlur = () => {
-    // Reset zoom on iOS Safari when focus leaves or form resets
-    const viewportMeta = document.querySelector('meta[name="viewport"]')
-    if (viewportMeta) {
-      const originalContent = viewportMeta.getAttribute('content')
-      viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1')
-      setTimeout(() => {
-        viewportMeta.setAttribute('content', originalContent || 'width=device-width, initial-scale=1')
-      }, 300)
-    }
-  }
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -33,7 +21,6 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    handleBlur() // Trigger zoom reset when attempting to submit
 
     const updatedMessage = `${formData.message}\n\nEmail: ${formData.email}`
 
@@ -106,9 +93,8 @@ export default function Contact() {
               placeholder="Your name"
               value={formData.name}
               onChange={handleChange}
-              onBlur={handleBlur}
               required
-              className="w-full px-5 py-4 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200 focus:outline-none focus:border-gray-400 transition-colors text-sm sm:text-base"
+              className="w-full px-5 py-4 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200 focus:outline-none focus:border-gray-400 transition-colors text-base"
             />
 
             <input
@@ -117,9 +103,8 @@ export default function Contact() {
               placeholder="Your email"
               value={formData.email}
               onChange={handleChange}
-              onBlur={handleBlur}
               required
-              className="w-full px-5 py-4 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200 focus:outline-none focus:border-gray-400 transition-colors text-sm sm:text-base"
+              className="w-full px-5 py-4 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200 focus:outline-none focus:border-gray-400 transition-colors text-base"
             />
 
             <textarea
@@ -127,10 +112,9 @@ export default function Contact() {
               placeholder="Tell me about your project"
               value={formData.message}
               onChange={handleChange}
-              onBlur={handleBlur}
               required
               rows={5}
-              className="w-full px-5 py-4 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200 focus:outline-none focus:border-gray-400 transition-colors resize-none text-sm sm:text-base"
+              className="w-full px-5 py-4 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200 focus:outline-none focus:border-gray-400 transition-colors resize-none text-base"
             />
 
             <div className="flex items-center gap-4">
