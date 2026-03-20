@@ -1,25 +1,17 @@
 import { motion } from 'framer-motion'
 import AnimatedText from '../ui/AnimatedText'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function About() {
-  const skills = [
-    {
-      title: 'Design Philosophy',
-      description:
-        'Minimalism meets functionality with focus on micro-interactions',
-      icon: '🎨'
-    },
-    {
-      title: 'Tech Stack',
-      description: 'React, Framer Motion, Tailwind, and modern tooling',
-      icon: '💻'
-    },
-    {
-      title: 'Approach',
-      description: 'User-centered design with performance as priority',
-      icon: '🔍'
-    }
-  ]
+  const { t } = useLanguage()
+  
+  const skillIcons = ['🎨', '💻', '🔍']
+  const translatedSkills = t('about.skills')
+
+  const skills = translatedSkills.map((skill, index) => ({
+    ...skill,
+    icon: skillIcons[index] || '✨'
+  }))
 
   return (
     <section
@@ -30,7 +22,7 @@ export default function About() {
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-6xl">
         <div className="mx-auto">
           <AnimatedText
-            text="Crafting Digital Excellence"
+            text={t('about.title')}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-10 sm:mb-14 md:mb-16 text-gradient"
           />
 
@@ -41,9 +33,7 @@ export default function About() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mb-10"
           >
-            Every project begins with a vision. I transform that vision into
-            reality through meticulous attention to detail, innovative design
-            thinking, and cutting-edge development practices.
+            {t('about.description')}
           </motion.p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -87,7 +77,7 @@ export default function About() {
                 </div>
 
                 <div className="mt-auto pt-4">
-                  <span className="text-xs text-gray-400">Key area</span>
+                  <span className="text-xs text-gray-400">{t('about.keyArea')}</span>
                 </div>
               </motion.article>
             ))}
@@ -96,4 +86,4 @@ export default function About() {
       </div>
     </section>
   )
-}
+}

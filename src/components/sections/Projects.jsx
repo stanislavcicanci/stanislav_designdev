@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import { useLanguage } from "../../context/LanguageContext";
 
 import project1Img from "../images/project1.jpg";
 import project2Img from "../images/project2.jpg";
@@ -9,61 +10,22 @@ import emberCoffeeImg from "../images/project4.jpg";
 import donerImg from "../images/project5.jpg";
 import flowersImg from "../images/project6.jpg";
 
-const projects = [
-  {
-    id: 1,
-    title: "Purely Ecological",
-    category: "Web Design & Development",
-    description: "Eco-friendly e-commerce with sleek animations, smooth UX, and high-performance design.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    image: project1Img,
-    url: "https://pur.md/",
-  },
-  {
-    id: 2,
-    title: "Delicy",
-    category: "Web Design & Development",
-    description: "Modern online food ordering app with fast, responsive, and smooth user experience.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    image: project2Img,
-    url: "https://delicy.vercel.app/Acasa.html",
-  },
-  {
-    id: 3,
-    title: "Cătălin Țurcanu",
-    category: "Portfolio Website",
-    description: "Sleek designer portfolio with smooth animations and dynamic, responsive navigation.",
-    tags: ["React", "Tailwind CSS", "Framer Motion"],
-    image: project3Img,
-    url: "https://project-portfolio-neon.vercel.app/",
-  },
-  {
-    id: 4,
-    title: "Ember Coffee",
-    category: "Coffee Shop Platform",
-    description: "Multi-location coffee shop website with interactive map and modern UI for 6 locations in Chișinău.",
-    tags: ["React", "Tailwind CSS", "Framer Motion", "MapLibre GL"],
-    image: emberCoffeeImg,
-    url: "https://coffee-shop-pi-six.vercel.app/",
-  },
-  {
-    id: 5,
-    title: "Doner Kebab & Shawarma",
-    category: "Food Delivery Website",
-    description: "Modern food ordering platform for authentic doner and kebab with dynamic menu filtering.",
-    tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
-    image: donerImg,
-    url: "https://doner-sepia.vercel.app/",
-  },
-  {
-    id: 6,
-    title: "FloWers 24/7",
-    category: "Flower Delivery Service",
-    description: "Premium 24/7 flower delivery service with elegant design and interactive catalog.",
-    tags: ["Tailwind CSS", "JavaScript", "Google Maps API"],
-    image: flowersImg,
-    url: "https://street-flowers.vercel.app/",
-  },
+const projectImages = [
+  project1Img,
+  project2Img,
+  project3Img,
+  emberCoffeeImg,
+  donerImg,
+  flowersImg
+];
+
+const projectUrls = [
+  "https://pur.md/",
+  "https://delicy.vercel.app/Acasa.html",
+  "https://project-portfolio-neon.vercel.app/",
+  "https://coffee-shop-pi-six.vercel.app/",
+  "https://doner-sepia.vercel.app/",
+  "https://street-flowers.vercel.app/"
 ];
 
 const containerVariants = {
@@ -102,6 +64,7 @@ const subtitleVariants = {
 };
 
 export default function Projects() {
+  const { t } = useLanguage();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.05 });
   const controls = useAnimation();
@@ -111,6 +74,19 @@ export default function Projects() {
       controls.start("visible");
     }
   }, [isInView, controls]);
+
+  const translatedProjects = t('projects.items');
+  const projects = translatedProjects.map((project, index) => ({
+    ...project,
+    image: projectImages[index],
+    url: projectUrls[index],
+    tags: index === 0 ? ["HTML", "CSS", "JavaScript"] :
+          index === 1 ? ["HTML", "CSS", "JavaScript"] :
+          index === 2 ? ["React", "Tailwind CSS", "Framer Motion"] :
+          index === 3 ? ["React", "Tailwind CSS", "Framer Motion", "MapLibre GL"] :
+          index === 4 ? ["HTML", "CSS", "JavaScript", "Responsive Design"] :
+          ["Tailwind CSS", "JavaScript", "Google Maps API"]
+  }));
 
   return (
     <section
@@ -128,7 +104,7 @@ export default function Projects() {
             animate={controls}
             className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-gradient"
           >
-            Featured Work
+            {t('projects.title')}
           </motion.h2>
           <motion.p
             variants={subtitleVariants}
@@ -136,7 +112,7 @@ export default function Projects() {
             animate={controls}
             className="text-lg text-gray-600"
           >
-            A curated selection of digital experiences built with precision, performance, and modern aesthetics.
+            {t('projects.subtitle')}
           </motion.p>
         </div>
 
@@ -146,9 +122,9 @@ export default function Projects() {
           initial="hidden"
           animate={controls}
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <motion.article
-              key={project.id}
+              key={index}
               variants={cardVariants}
               className="group relative bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-xl"
             >
@@ -203,7 +179,7 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white font-medium hover:bg-[#126fd9] transition-all duration-300 transform hover:translate-x-1"
                 >
-                  Visit Website
+                  {t('projects.visit')}
                   <ExternalLink size={16} />
                 </a>
               </div>

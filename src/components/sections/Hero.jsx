@@ -1,10 +1,12 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useLanguage } from '../../context/LanguageContext'
 
 import AnimatedText from '../ui/AnimatedText'
 import GradientButton from '../ui/GradientButton'
 
 function Hero() {
+  const { t } = useLanguage()
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -41,7 +43,7 @@ function Hero() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
             </span>
             <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">
-              Available for new projects
+              {t('hero.available')}
             </span>
           </motion.div>
 
@@ -53,7 +55,7 @@ function Hero() {
               transition={{ duration: 0.8 }}
               className="text-6xl sm:text-8xl md:text-9xl font-black text-gradient leading-none"
             >
-              STANISLAV
+              {t('hero.title')}
             </motion.h1>
             <motion.span
               initial={{ opacity: 0, y: 30 }}
@@ -61,13 +63,13 @@ function Hero() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl sm:text-6xl md:text-7xl font-black text-gray-900 mt-2 tracking-tight"
             >
-              DesignDev
+              {t('hero.subtitle')}
             </motion.span>
           </div>
 
           <div className="max-w-2xl mx-auto mb-12">
             <AnimatedText
-              text="Digital Experience Architect"
+              text={t('hero.description')}
               className="text-xl sm:text-2xl md:text-3xl font-light text-gray-500"
             />
           </div>
@@ -78,7 +80,7 @@ function Hero() {
             transition={{ delay: 0.6 }}
           >
             <GradientButton
-              text="Explore My Work"
+              text={t('hero.button')}
               onClick={() => document.getElementById('projects').scrollIntoView()}
             />
           </motion.div>
@@ -88,4 +90,4 @@ function Hero() {
   )
 }
 
-export default Hero
+export default Hero

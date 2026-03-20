@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 
 const BehanceIcon = ({ size }) => (
   <svg 
@@ -42,6 +43,7 @@ const socialLinks = [
 ]
 
 export default function Footer() {
+  const { t } = useLanguage()
   return (
     <footer className="relative bg-gray-900 text-white py-16 overflow-hidden">
 
@@ -87,10 +89,10 @@ export default function Footer() {
             viewport={{ once: true }}
             className="text-gray-500 text-sm z-100"
           >
-            © {new Date().getFullYear()} Stanislav DesignDev. All rights reserved.
+            {t('footer.rights').replace('{year}', new Date().getFullYear())}
           </motion.p>
         </div>
       </div>
     </footer>
   )
-}
+}

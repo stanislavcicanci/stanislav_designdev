@@ -1,86 +1,70 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '../../context/LanguageContext'
 
-const steps = [
-  {
-    id: 1,
-    title: 'Discovery',
-    description: 'Understanding your vision, goals, and requirements',
-    icon: (props) => (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <circle cx="12" cy="12" r="8"/>
-        <path d="M12 8v8"/>
-        <path d="M8 12h8"/>
-        <path d="M21 12a9 9 0 0 1-9 9"/>
-        <path d="M3 12a9 9 0 0 1 9-9"/>
-        <path d="M16 16l4 4"/>
-        <path d="M8 8L4 4"/>
-      </svg>
-    )
-  },
-  {
-    id: 2,
-    title: 'Strategy',
-    description: 'Crafting the perfect technical and creative approach',
-    icon: (props) => (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-        <path d="M2 17l10 5 10-5"/>
-        <path d="M2 12l10 5 10-5"/>
-        <circle cx="12" cy="12" r="2"/>
-        <path d="M12 22v-8"/>
-      </svg>
-    )
-  },
-  {
-    id: 3,
-    title: 'Design',
-    description: 'Creating pixel-perfect UI with engaging interactions',
-    icon: (props) => (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <rect x="3" y="4" width="18" height="16" rx="2" ry="2"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-        <circle cx="9" cy="14" r="1.5" fill="currentColor" stroke="none"/>
-        <circle cx="15" cy="14" r="1.5" fill="currentColor" stroke="none"/>
-        <path d="M8 6h8"/>
-        <path d="M7 18h10"/>
-      </svg>
-    )
-  },
-  {
-    id: 4,
-    title: 'Development',
-    description: 'Building robust, performant digital experiences',
-    icon: (props) => (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M16 18L22 12L16 6"/>
-        <path d="M8 6L2 12L8 18"/>
-        <rect x="9" y="2" width="6" height="20" rx="1" ry="1"/>
-        <line x1="12" y1="8" x2="12" y2="10"/>
-        <line x1="12" y1="14" x2="12" y2="16"/>
-      </svg>
-    )
-  },
-  {
-    id: 5,
-    title: 'Refinement',
-    description: 'Iterative testing and optimization',
-    icon: (props) => (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-        <path d="M12 6v6l4 2"/>
-        <path d="M16 12h-4"/>
-        <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
-        <path d="M7 7l2 2"/>
-        <path d="M17 7l-2 2"/>
-      </svg>
-    )
-  }
+const stepIcons = [
+  (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="12" cy="12" r="8"/>
+      <path d="M12 8v8"/>
+      <path d="M8 12h8"/>
+      <path d="M21 12a9 9 0 0 1-9 9"/>
+      <path d="M3 12a9 9 0 0 1 9-9"/>
+      <path d="M16 16l4 4"/>
+      <path d="M8 8L4 4"/>
+    </svg>
+  ),
+  (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+      <path d="M2 17l10 5 10-5"/>
+      <path d="M2 12l10 5 10-5"/>
+      <circle cx="12" cy="12" r="2"/>
+      <path d="M12 22v-8"/>
+    </svg>
+  ),
+  (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="3" y="4" width="18" height="16" rx="2" ry="2"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+      <circle cx="9" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="15" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+      <path d="M8 6h8"/>
+      <path d="M7 18h10"/>
+    </svg>
+  ),
+  (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M16 18L22 12L16 6"/>
+      <path d="M8 6L2 12L8 18"/>
+      <rect x="9" y="2" width="6" height="20" rx="1" ry="1"/>
+      <line x1="12" y1="8" x2="12" y2="10"/>
+      <line x1="12" y1="14" x2="12" y2="16"/>
+    </svg>
+  ),
+  (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+      <path d="M12 6v6l4 2"/>
+      <path d="M16 12h-4"/>
+      <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+      <path d="M7 7l2 2"/>
+      <path d="M17 7l-2 2"/>
+    </svg>
+  )
 ]
 
 export default function Process() {
+  const { t } = useLanguage()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-120px' })
+
+  const translatedSteps = t('process.steps')
+  const steps = translatedSteps.map((step, index) => ({
+    ...step,
+    id: index + 1,
+    icon: stepIcons[index]
+  }))
 
   const container = {
     hidden: { opacity: 0 },
@@ -114,7 +98,7 @@ export default function Process() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center text-gradient"
         >
-          The Process
+          {t('process.title')}
         </motion.h2>
 
         <motion.div

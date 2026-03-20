@@ -1,12 +1,22 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Menu, X, Globe, ChevronDown } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [isLangOpen, setIsLangOpen] = useState(false)
+  const langRef = useRef<HTMLDivElement>(null)
+  const { language, setLanguage, t } = useLanguage()
+
+  const languages = [
+    { code: 'en', label: 'ENG' },
+    { code: 'ro', label: 'RO' },
+    { code: 'ru', label: 'RU' }
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +48,18 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll)
     handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+        setIsLangOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }, [])
 
   useEffect(() => {
@@ -57,10 +78,10 @@ export default function Navbar() {
   }, [isOpen])
 
   const menuItems = [
-    { name: 'About', id: 'about' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'Process', id: 'process' },
-    { name: 'Contact', id: 'contact' }
+    { name: t('nav.about'), id: 'about' },
+    { name: t('nav.projects'), id: 'projects' },
+    { name: t('nav.process'), id: 'process' },
+    { name: t('nav.contact'), id: 'contact' }
   ]
 
   const scrollTo = (id: string) => {
@@ -143,6 +164,52 @@ export default function Navbar() {
                   )}
                 </motion.button>
               ))}
+
+              {/* Language Switcher Desktop */}
+              <div className="relative ml-4" ref={langRef}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setIsLangOpen(!isLangOpen)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-sm font-bold text-gray-700"
+                >
+                  <Globe size={16} className="text-blue-600" />
+                  <span>{language.toUpperCase()}</span>
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-300 ${isLangOpen ? 'rotate-180' : ''}`}
+                  />
+                </motion.button>
+
+                <AnimatePresence>
+                  {isLangOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 py-2 w-32 bg-white rounded-xl shadow-xl border border-gray-100 backdrop-blur-xl z-50"
+                    >
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            setLanguage(lang.code)
+                            setIsLangOpen(false)
+                          }}
+                          className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50 flex items-center justify-between ${language === lang.code ? 'text-blue-600' : 'text-gray-700'
+                            }`}
+                        >
+                          {lang.label}
+                          {language === lang.code && (
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
             <motion.button
@@ -215,6 +282,30 @@ export default function Navbar() {
                   {item.name}
                 </motion.button>
               ))}
+
+              <div className="pt-8 border-t border-gray-100">
+                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <Globe size={16} /> Language
+                </p>
+                <div className="flex gap-4">
+                  {languages.map((lang) => (
+                    <motion.button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code)
+                        setIsOpen(false)
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                      className={`px-4 py-2 rounded-xl text-lg font-bold transition-all ${language === lang.code
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
+                        : 'bg-gray-100 text-gray-600'
+                        }`}
+                    >
+                      {lang.label}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

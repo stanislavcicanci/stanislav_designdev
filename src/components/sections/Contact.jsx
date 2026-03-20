@@ -2,8 +2,10 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useState, useRef } from 'react'
 import emailjs from '@emailjs/browser'
 import GradientButton from '../ui/GradientButton'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -68,7 +70,7 @@ export default function Contact() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.05 }}
           >
-            Let's Collaborate
+            {t('contact.title')}
           </motion.h2>
 
           <motion.p
@@ -77,7 +79,7 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.12 }}
             className="text-base sm:text-lg text-gray-600 text-center mb-8"
           >
-            Have a project in mind? Let's discuss how we can bring your vision to life.
+            {t('contact.subtitle')}
           </motion.p>
 
           <motion.form
@@ -90,7 +92,7 @@ export default function Contact() {
             <input
               type="text"
               name="name"
-              placeholder="Your name"
+              placeholder={t('contact.namePlaceholder')}
               value={formData.name}
               onChange={handleChange}
               required
@@ -100,7 +102,7 @@ export default function Contact() {
             <input
               type="email"
               name="email"
-              placeholder="Your email"
+              placeholder={t('contact.emailPlaceholder')}
               value={formData.email}
               onChange={handleChange}
               required
@@ -109,7 +111,7 @@ export default function Contact() {
 
             <textarea
               name="message"
-              placeholder="Tell me about your project"
+              placeholder={t('contact.messagePlaceholder')}
               value={formData.message}
               onChange={handleChange}
               required
@@ -120,7 +122,7 @@ export default function Contact() {
             <div className="flex items-center gap-4">
               <div className="min-w-[170px]">
                 <GradientButton
-                  text={isSubmitting ? 'Sending...' : 'Send Message'}
+                  text={isSubmitting ? t('contact.sending') : t('contact.send')}
                   type="submit"
                   disabled={isSubmitting}
                 />
@@ -133,7 +135,7 @@ export default function Contact() {
                     exit={{ opacity: 0, x: 12 }}
                     className="text-green-500 font-medium text-base"
                   >
-                    Message sent successfully!
+                    {t('contact.success')}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -143,4 +145,4 @@ export default function Contact() {
       </div>
     </section>
   )
-}
+}
