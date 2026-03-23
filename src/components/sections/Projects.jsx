@@ -90,7 +90,6 @@ export default function Projects() {
       ["Tailwind CSS", "JavaScript", "Google Maps API"]
   }));
 
-  // 🔴 AICI ascundem Delicy (index 1)
   const visibleProjects = projects.filter((_, index) => index !== 1);
 
   return (

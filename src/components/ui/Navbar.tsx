@@ -165,7 +165,6 @@ export default function Navbar() {
                 </motion.button>
               ))}
 
-              {/* Language Switcher Desktop */}
               <div className="relative ml-4" ref={langRef}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}

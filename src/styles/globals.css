@@ -18,12 +18,10 @@
   }
 }
 
-/* Ascunde scrollbar-ul pe orizontală */
 body::-webkit-scrollbar:horizontal {
   display: none;
 }
 
-/* Opțional: Stilizează scrollbar-ul vertical */
 body::-webkit-scrollbar {
   width: 8px;
 }
