@@ -27,18 +27,18 @@ export default function Contact() {
     const updatedMessage = `${formData.message}\n\nEmail: ${formData.email}`
 
     try {
-      await emailjs.send(
-        'service_vrwctvo',
-        'template_92mltst',
-        {
-          from_name: formData.name,
-          to_name: 'Stanislav',
-          from_email: formData.email,
-          to_email: 'stanislavacicanci@gmail.com',
-          message: updatedMessage
-        },
-        '1JTlKFbv-5WQvnVa3'
-      )
+       await emailjs.send(
+      'service_6bjpy1l',
+      'template_92mltst',
+      {
+        from_name: formData.name,
+        to_name: 'Stanislav',
+        from_email: formData.email,
+        to_email: 'stanislavacicanci@gmail.com',
+        message: updatedMessage
+      },
+      '1JTlKFbv-5WQvnVa3'
+    )
 
       setFormData({
         name: '',
@@ -145,4 +145,4 @@ export default function Contact() {
       </div>
     </section>
   )
-}
+}
